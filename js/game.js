@@ -145,12 +145,14 @@ function moveLeft() {
 function moveRight() {
     let moved = false;
     for (let r = 0; r < size; r++) {
-        const oldRow = [...board[r]];
-        const reversed = oldRow.reverse();
+        const originalRow = board[r];
+        const reversed = [...originalRow].reverse();
         const merged = slideAndMerge(reversed);
         const newRow = merged.reverse();
-        if (newRow.join(',') !== oldRow.reverse().join(',')) moved = true;
-        board[r] = newRow;
+        if (newRow.join(',') !== originalRow.join(',')) {
+            moved = true;
+            board[r] = newRow;
+        }
     }
     return moved;
 }
